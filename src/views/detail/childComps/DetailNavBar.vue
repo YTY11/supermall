@@ -27,6 +27,7 @@
         detailItemIndex:0
       }
     },
+
     components:{
       NavBar
     },
@@ -51,6 +52,7 @@
 <style>
   .detail-nav-bar{
     background-color: #fff;
+    z-index: 1;
   }
   .detail-nav-bar-conter{
     display: flex;

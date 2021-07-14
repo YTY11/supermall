@@ -10,7 +10,11 @@
       class="tab-control2" />
 
     <!-- Scroll 包裹内容滚动 -->
-    <scroll ref="scroll" class="scroll-content" :probe-type="3" :pull-up-load="true" @scroll="scroll"
+    <scroll ref="scroll"
+            class="scroll-content"
+            :probe-type="3"
+            :pull-up-load="true"
+            @scroll="scroll"
       @upLoad="loadMore">
 
       <!-- 轮播图 -->

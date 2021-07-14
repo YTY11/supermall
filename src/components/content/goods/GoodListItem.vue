@@ -5,7 +5,7 @@
     <div class="good-list-item-msg">
       <p>{{itemList.title}}</p>
       <div class="price-msg">
-        <span>{{itemList.orgPrice}}</span>
+        <span class="price-color">{{itemList | priceFilters}}</span>
         <span class="cfav"><img src="~assets/img/common/collect.svg" />{{itemList.cfav}}</span>
       </div>
 
@@ -33,7 +33,24 @@
 
       //点击商品进入详情页面
       clickGoods(){
-        this.$router.push('/detail/'+this.itemList.iid)
+        if(this.itemList.iid!==undefined){
+          console.log("ssssssss")
+          this.$router.push('/detail/'+this.itemList.iid)
+        }
+        else{
+
+          this.$router.push('/detail/'+this.itemList.item_id)
+        }
+      }
+    },
+    filters:{
+      priceFilters(itemList){
+        if(itemList.orgPrice !== undefined){
+          return itemList.orgPrice
+        }
+        else{
+          return '￥'+itemList.discountPrice
+        }
       }
     }
   }
@@ -81,5 +98,8 @@
     margin-top: -4px;
     padding-top: 0px;
     vertical-align: middle;
+  }
+  .price-color{
+    color: var(--color-tint);
   }
 </style>

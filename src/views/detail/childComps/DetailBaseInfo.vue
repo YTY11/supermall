@@ -21,8 +21,8 @@
 
     <div class="detail-base-services">
       <span v-for="(item,index) in goods.services" :key="index">
-        <img :src="item.icon"/>{{item.name}}</span>
-
+        <img :src="item.icon"/>{{item.name}}
+      </span>
     </div>
 
   </div>
@@ -88,11 +88,8 @@ export default {
   .detail-base-services {
     box-shadow: 0 -1px 1px rgba(0, 0, 0 , 0.1);
     border-bottom: 2px solid rgba(0,0,0,0.1);
-    /*line-height: 60px;*/
     height: 60px;
     font-size: 12px;
-    /*white-space: nowrap;*/
-    /*word-break: break-all;*/
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -100,12 +97,10 @@ export default {
     /* 下方注释解决webkit-box-orient属性丢失问题 */
     /* autoprefixer: ignore next */
     -webkit-box-orient: vertical;
-    padding: 10px 0px;
+    padding: 10px;
 
   }
-/*.detail-base-services span{*/
-/*  white-space: nowrap;*/
-/*}*/
+
   .detail-base-services span img{
     width: 16px;
     height: 16px;

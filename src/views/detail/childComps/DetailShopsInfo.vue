@@ -131,7 +131,7 @@ table td{
 
 .shops-bottom-button{
   text-align: center;
-  padding: 20px 0;
+  padding: 20px 0 0 0;
   font-size: 14px;
 }
 .shops-bottom-button button{
