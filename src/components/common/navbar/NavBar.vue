@@ -25,8 +25,6 @@
     line-height: 44px;
     font-size: 16px;
     text-align: center;
- 
-
     z-index: 7;
   }
 

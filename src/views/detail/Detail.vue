@@ -1,8 +1,8 @@
 <template>
   <div id="detail">
     <!-- 头部导航栏 -->
-    <detail-nav-bar @detailItemClick="detailItemClick" ref="nav"/>
-<toast/>
+    <detail-nav-bar class="detail-nav-bar" @detailItemClick="detailItemClick" ref="nav"/>
+
     <scroll class="detail-scroll"
             :probe-type="3"
             ref="scroll" @scroll="scroll">
@@ -52,7 +52,7 @@ import GoodsList from "@/components/content/goods/GoodsList";
 //底部导航组件
 import DetailBottomBar from "@/views/detail/childComps/DetailBottomBar";
 
-import Toast from "@/components/common/toast/Toast";
+
 
 
 //回到顶部组件
@@ -63,6 +63,9 @@ import Scroll from "@/components/common/scroll/Scroll";
 
 //引入防抖函数
 import {debounce} from "@/common/utils";
+//引入mapAction 用于使用action中定义的方法
+import {mapActions} from 'vuex'
+
 
 //网路请求数据
 import {getDetail,Goods,Shops,GoodsParams,getRecommend} from "network/detail.js";
@@ -95,7 +98,7 @@ export default {
     DetailCommentInfo,
     GoodsList,
     DetailBottomBar,
-    Toast,
+
 
     BackTop,
 
@@ -117,9 +120,9 @@ export default {
         this.$refs.goodsParams.$el.offsetTop,
         this.$refs.commentInfo.$el.offsetTop,
         this.$refs.recommend.$el.offsetTop)
-      console.log(this.themeTopYs)
+
     },500);
-    // this.themTopYsFunction = debounce(this.$refs.scroll.refresh,300)
+
 
   },
 
@@ -129,7 +132,6 @@ export default {
     getDetail(iid) {
       getDetail(iid).then(res=>{
         const data = res.result
-        // console.log(res)
         //1.获取轮播图数据
         this.topImages = res.result.itemInfo.topImages;
         //2.获取价格活动等信息
@@ -143,7 +145,6 @@ export default {
         //6.获取评论信息
         if(data.rate.cRate !== 0) this.commentInfo = data.rate.list[0]
 
-        // console.log(this.commentInfo)
 
       }).catch(err=>{
         console.log(err)
@@ -155,7 +156,6 @@ export default {
     getRecommend(){
       getRecommend().then((res)=>{
         this.recommend = res.data.list
-        console.log(res)
       }).catch(err=>{
         console.log(err)
       })
@@ -186,7 +186,6 @@ export default {
       const length = this.themeTopYs.length
       for (let i = 0; i < length - 1; i++) {
         if(this.detailItemIndex != i && this.themeTopYs[i] <= -p.y && -p.y < this.themeTopYs[i+1]){
-          console.log(i)
           this.detailItemIndex = i
           this.$refs.nav.detailItemIndex = i
         }
@@ -198,9 +197,11 @@ export default {
 
     },
 
+    //导入Vuex中加入购物方法
+    ...mapActions(['addCar']),
     //加入购物车所需数据
     addToShopCar(){
-      console.log("-----------")
+
       const shopMsg = {}
       shopMsg.img = this.topImages[0]
       shopMsg.title = this.goods.title
@@ -208,6 +209,10 @@ export default {
       shopMsg.price = this.goods.newPrice
       shopMsg.iid = this.iid
 
+      //将商品交给Vuex管理
+      this.addCar(shopMsg).then( res =>{
+        this.$toast.show(res)
+      })
 
     }
 
@@ -221,7 +226,9 @@ export default {
   background: #fff;
   position: relative;
 }
-
+.detail-nav-bar{
+  background-color: #fff;
+}
  .detail-swiper{
    width: 100%;
    height: 260px;

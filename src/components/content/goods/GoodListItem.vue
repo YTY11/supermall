@@ -34,7 +34,6 @@
       //点击商品进入详情页面
       clickGoods(){
         if(this.itemList.iid!==undefined){
-          console.log("ssssssss")
           this.$router.push('/detail/'+this.itemList.iid)
         }
         else{

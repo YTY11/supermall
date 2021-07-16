@@ -21,9 +21,6 @@
     },
     components:{
       GoodListItem
-    },
-    created() {
-      console.log(this.showGoods);
     }
   }
 </script>
