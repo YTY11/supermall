@@ -18,13 +18,13 @@
       @upLoad="loadMore">
 
       <!-- 轮播图 -->
-      <!-- <home-swiper :banners="banners" class="home-swiper" @imgLoad="imgLoad"/> -->
+       <home-swiper :banners="banners" class="home-swiper" @imgLoad="imgLoad"/>
 
       <!-- 优惠组件 -->
-      <!-- <recommentd-view :recommends="recommends"/> -->
+       <recommentd-view :recommends="recommends"/>
 
       <!-- 本周流行 -->
-      <!-- <popular-view /> -->
+       <popular-view />
 
       <!-- '流行','新款','精选' 选项 -->
       <tab-control :titles="['流行','新款','精选']" @tabClick="tabClick" ref="tabControl1" />
@@ -99,7 +99,8 @@
         isShowTabControl2: false,
         localtion1: 0,
         localtion2: 0,
-        localtion3: 0
+        localtion3: 0,
+        deactivatedY:0
       }
     },
     components: {
@@ -111,6 +112,19 @@
       PopularView,
       TabControl,
       GoodsList
+    },
+
+    deactivated() {
+      //离开页面触发
+      // 离开时，保存当前页面的y值
+      this.deactivatedY = this.$refs.scroll.getScrollY()
+      // //取消掉当前被监听的全局事件this.itemImgListener
+      this.$bus.$off('itemImageLoad')
+    },
+    activated() {
+      //进入页面触发
+      this.$refs.scroll.scrollTo(0,this.deactivatedY,0)
+      this.$refs.scroll.refresh()
     },
     computed: {
       showGoods() {
@@ -143,7 +157,7 @@
       //监听页面滚动位置 当页面滚动向下滚动300时回到顶部按钮显示
       scroll(p) {
         this.backTopShow = -p.y >= 300
-
+        this.deactivatedY = p.y
         //通过获取tabControl组件的高度 监听滚动位置 以此判断 tabControl2组件是否显示 从而实现吸顶效果
         this.isShowTabControl2 = -p.y > this.$refs.tabControl1.$el.offsetTop
 
@@ -157,30 +171,30 @@
       //监听用户点击的选项（流行 | 新款 | 精选）
       tabClick(index) {
 
-        //记录用户浏览离开时每个选项的位置，实现再次进入时还在原来位置的效果
-        switch (this.type) {
-          case 'pop':
-            this.localtion1 = this.$refs.scroll.scrollY()
-            break
-          case 'sell':
-            this.localtion2 = this.$refs.scroll.scrollY()
-            break
-          case 'new':
-            this.localtion3 = this.$refs.scroll.scrollY()
-            break
-        }
+        //记录用户浏览离开时每个选项的位置，实现再次进入时还在原来位置的效果,感觉使用效果不好就注释掉了
+        // switch (this.type) {
+        //   case 'pop':
+        //     this.localtion1 = this.$refs.scroll.scrollY()
+        //     break
+        //   case 'sell':
+        //     this.localtion2 = this.$refs.scroll.scrollY()
+        //     break
+        //   case 'new':
+        //     this.localtion3 = this.$refs.scroll.scrollY()
+        //     break
+        // }
 
         switch (index) {
           case 0:
             this.type = 'pop'
-            this.$refs.scroll.scrollTo(0, this.localtion1, 0)
+            // this.$refs.scroll.scrollTo(0, this.localtion1, 0)
             break
           case 1:
-            this.$refs.scroll.scrollTo(0, this.localtion2, 0)
+            // this.$refs.scroll.scrollTo(0, this.localtion2, 0)
             this.type = 'sell'
             break
           case 2:
-            this.$refs.scroll.scrollTo(0, this.localtion3, 0)
+            // this.$refs.scroll.scrollTo(0, this.localtion3, 0)
             this.type = 'new'
             break
         }
@@ -219,7 +233,8 @@
         }).catch(err => {
           console.log(err);
         })
-      }
+      },
+
     }
   }
 </script>

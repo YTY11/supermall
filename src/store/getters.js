@@ -5,7 +5,6 @@ export default{
   },
   //获取购物车商品
   cartList(state){
-    console.log(state.cartList)
     return state.cartList
   }
 }

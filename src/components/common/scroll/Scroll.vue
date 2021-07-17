@@ -97,7 +97,7 @@
        * 获取 better-scroll 滚动的位置（y）
        * 调用：y方法
        */
-      scrollY(){
+      getScrollY(){
        return this.scroll && this.scroll.y
       }
 

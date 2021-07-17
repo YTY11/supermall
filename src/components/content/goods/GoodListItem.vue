@@ -1,7 +1,6 @@
 <template>
   <div class="good-list-item" @click="clickGoods">
-    <!-- <img :src="itemList.show.img" :alt="itemList.title" @load="imageLoad" /> -->
-    <img src="~assets/img/common/top.png" :alt="itemList.title" @load="imageLoad" />
+     <img v-lazy="showItemImage" :src="itemList.image" :alt="itemList.title" @load="imageLoad" />
     <div class="good-list-item-msg">
       <p>{{itemList.title}}</p>
       <div class="price-msg">
@@ -24,7 +23,12 @@
         }
       }
     },
-
+    computed:{
+      //图片懒加载
+      showItemImage(){
+        return  this.itemList.image || this.itemList.show.img
+      }
+    },
     methods: {
       //使用事件总线将图片加载完成信息记录下来，用于其他组件使用
       imageLoad() {

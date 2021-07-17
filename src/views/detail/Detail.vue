@@ -7,19 +7,19 @@
             :probe-type="3"
             ref="scroll" @scroll="scroll">
       <!--轮播图-->
-<!--          <detail-swiper :item-imgs="topImages" class="detail-swiper"/>-->
+          <detail-swiper :item-imgs="topImages" class="detail-swiper"/>
       <!--商品信息-->
-<!--      <detail-base-info :goods="goods"/>-->
+      <detail-base-info :goods="goods"/>
       <!-- 店铺信息 -->
-<!--      <detail-shops-info :shops="shops"/>-->
+      <detail-shops-info :shops="shops"/>
       <!-- 商品详情 -->
-<!--      <detail-goods-info :detail-info="detailInfo" @imgsLoad="imgsLoad"/>-->
+      <detail-goods-info :detail-info="detailInfo" @imgsLoad="imgsLoad"/>
       <!-- 参数信息 -->
-<!--      <detail-params-info :goods-params="goodsParams" ref="goodsParams"/>-->
+      <detail-params-info :goods-params="goodsParams" ref="goodsParams"/>
       <!-- 评论信息 -->
-<!--      <detail-comment-info :comment-info="commentInfo"  ref="commentInfo"/>-->
+      <detail-comment-info :comment-info="commentInfo"  ref="commentInfo"/>
       <!-- 推荐商品信息 -->
-<!--      <goods-list :showGoods="recommend" ref="recommend"/>-->
+      <goods-list :showGoods="recommend" ref="recommend"/>
     </scroll>
 
     <!-- 回到顶部按钮 -->
@@ -125,7 +125,6 @@ export default {
 
 
   },
-
   methods: {
     //网络请求数据
     //根据iid查询详情数据

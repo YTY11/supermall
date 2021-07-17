@@ -25,6 +25,9 @@ export default {
     Scroll,
     CartListItem
   },
+  activated() {
+    this.$refs.scroll.refresh()
+  },
   computed:{
     //获取购物车数据
     ...mapGetters(["cartList"])
