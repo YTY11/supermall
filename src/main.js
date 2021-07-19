@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router/index.js'
 import toast from 'components/common/toast'
 import store from "@/store/index"
-
 import VueLazyload from 'vue-lazyload'
 
 //懒加载图片
