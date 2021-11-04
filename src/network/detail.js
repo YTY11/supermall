@@ -3,7 +3,7 @@ import {request} from "@/network/request";
 //详情页根据iid查询的数据
 export function getDetail(iid){
  return request({
-    url:'/api/m5/detail',
+    url:'/detail',
     params:{
       iid
     }
@@ -12,7 +12,7 @@ export function getDetail(iid){
 //推荐商品数据
 export function getRecommend(){
   return request({
-    url:'/api/m5/recommend'
+    url:'/recommend'
   })
 }
 
